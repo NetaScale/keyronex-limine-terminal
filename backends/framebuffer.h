@@ -90,7 +90,7 @@ struct term_context *fbterm_init(
     uint32_t *default_bg_bright, uint32_t *default_fg_bright,
     void *font, size_t font_width, size_t font_height, size_t font_spacing,
     size_t font_scale_x, size_t font_scale_y,
-    size_t margin
+    size_t margin, size_t margin_top, size_t margin_bot
 );
 
 #ifdef __cplusplus

@@ -768,7 +768,7 @@ struct term_context *fbterm_init(
     uint32_t *default_bg_bright, uint32_t *default_fg_bright,
     void *font, size_t font_width, size_t font_height, size_t font_spacing,
     size_t font_scale_x, size_t font_scale_y,
-    size_t margin
+    size_t margin, size_t margin_top, size_t margin_bot
 ) {
     struct fbterm_context *ctx = _malloc(sizeof(struct fbterm_context));
 
@@ -894,10 +894,10 @@ struct term_context *fbterm_init(
     ctx->glyph_height = font_height * font_scale_y;
 
     _ctx->cols = (ctx->width - margin * 2) / ctx->glyph_width;
-    _ctx->rows = (ctx->height - margin * 2) / ctx->glyph_height;
+    _ctx->rows = (ctx->height - margin_top - margin_bot) / ctx->glyph_height;
 
     ctx->offset_x = margin + ((ctx->width - margin * 2) % ctx->glyph_width) / 2;
-    ctx->offset_y = margin + ((ctx->height - margin * 2) % ctx->glyph_height) / 2;
+    ctx->offset_y = margin_top + ((ctx->height - margin_top - margin_bot) % ctx->glyph_height) / 2;
 
     ctx->grid_size = _ctx->rows * _ctx->cols * sizeof(struct fbterm_char);
     ctx->grid = _malloc(ctx->grid_size);
